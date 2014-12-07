@@ -4190,6 +4190,9 @@ class S3ProjectTaskModel(S3Model):
         staff = auth.is_logged_in()
 
         tablename = "project_task"
+        type_represent = S3Represent(lookup = "pr_person",
+                                     fields = ["first_name","last_name"],
+                                     translate=True)
         define_table(tablename,
                      super_link("doc_id", "doc_entity"),
                      Field("template", "boolean",
@@ -4216,6 +4219,15 @@ class S3ProjectTaskModel(S3Model):
                             ),
                      Field("source",
                            label = T("Source"),
+                           ),
+                     Field("mentor",
+                           label = T("Mentor"),
+                           requires = IS_EMPTY_OR(
+                                                  IS_ONE_OF(db,"pr_person.id",
+                                                            type_represent,
+                                                            sort = True,
+                                                 )),
+                           represent = type_represent,
                            ),
                      Field("source_url",
                            label = T("Source Link"),
@@ -4408,8 +4420,14 @@ class S3ProjectTaskModel(S3Model):
                 jquery_ready_append('''$.filterOptionsS3(%s)''' % \
                                     json.dumps(options, separators=SEPARATORS))
 
-        list_fields.extend(("name",
-                            "pe_id",
+        lappend("name")
+
+        if settings.get_project_task_mentor():
+            lappend("mentor")
+            fappend(S3OptionsFilter("mentor"))
+            cappend("mentor")
+
+        list_fields.extend(("pe_id",
                             "date_due",
                             "time_estimated",
                             "time_actual",

@@ -2842,6 +2842,12 @@ class S3Config(Storage):
         """
         return self.project.get("task_tag", False)
 
+    def get_project_task_mentor(self):
+        """
+            Use Mentors in Tasks
+        """
+        return self.project.get("task_mentor", False)
+
     def get_project_projects(self):
         """
             Link Activities & Tasks to Projects

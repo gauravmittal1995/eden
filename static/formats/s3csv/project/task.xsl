@@ -18,6 +18,7 @@
          Author...............string..........Task created_by
          Source...............string..........Task source
          Assigned.............string..........Person Initials
+         Mentor...............string..........Mentor
          Date Due.............date............Task date_due
          Milestone............string..........Milestone name
          Time Estimated.......integer.........Task time_estimated 
@@ -108,6 +109,7 @@
         <xsl:variable name="Task" select="col[@field='Short Description']/text()"/>
         <xsl:variable name="Date" select="col[@field='Date']/text()"/>
         <xsl:variable name="Author" select="col[@field='Author']/text()"/>
+        <xsl:value-of name="Mentor" select="col[@field='Mentor']/text()"/>
         <xsl:variable name="DateDue" select="col[@field='Date Due']/text()"/>
         <xsl:variable name="Milestone" select="col[@field='Milestone']/text()"/>
         <xsl:variable name="TimeEstimated" select="col[@field='Time Estimated']/text()"/>

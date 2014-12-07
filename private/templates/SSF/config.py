@@ -153,6 +153,8 @@ settings.project.sectors = True
 settings.project.projects = True
 # Uncomment this to use Tags in Tasks
 settings.project.task_tag = True
+# Uncomment this to use Mentors in Tasks
+settings.project.task_mentor = True
 # Uncomment this to enable Hazards in 3W projects
 settings.project.hazards = True
 # Uncomment this to enable Themes in 3W projects
@@ -517,12 +519,16 @@ def customise_project_task_controller(**attr):
         status = TR(TH("%s: " % T("Status")),
                     row["project_task.status"])
 
+        mentor = TR(TH("%s: " % T("Mentor")),
+                    row["project_task.mentor"])
+
         rheader = DIV(TABLE(project,
                             TR(TH("%s: " % table.name.label),
                                record.name,
                                ),
                             milestone,
                             tags,
+                            mentor,
                             status,
                             created_by,
                             interest,
@@ -686,6 +692,7 @@ def customise_project_task_resource(r, tablename):
                                label = T("Tag"),
                                field = "tag_id",
                            ),
+                           "mentor",
                            "priority",
                            "status",
                            S3SQLInlineComponent(
@@ -722,6 +729,7 @@ def customise_project_task_resource(r, tablename):
                                label = T("Tags"),
                                fields = [("", "tag_id")],
                            ),
+                           "mentor",
                            "priority",
                            "status",
                            S3SQLInlineComponent(

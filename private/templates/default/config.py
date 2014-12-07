@@ -764,6 +764,8 @@ settings.gis.geonames_username = "eden_test"
 #settings.project.sectors = False
 # Uncomment this to use Tags in Tasks
 #settings.project.task_tag = True
+# Uncomment this to use Mentors in Tasks
+settings.project.task_mentor = True
 # Uncomment this to enable Themes in 3W projects
 #settings.project.themes = True
 # Uncomment this to use Theme Percentages for projects
